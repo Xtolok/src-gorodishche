@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Render → Start Command (НЕ Build Command!)
 set -o errexit
 
 python manage.py migrate --noinput
