@@ -20,6 +20,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 load_dotenv(BASE_DIR / '.env')
 
+ON_RENDER = os.environ.get('RENDER') == 'true'
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -31,11 +33,20 @@ SECRET_KEY = os.environ.get(
 )
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', 'True').lower() in ('true', '1', 'yes')
+DEBUG = os.environ.get(
+    'DEBUG',
+    'False' if ON_RENDER else 'True',
+).lower() in ('true', '1', 'yes')
+
+_default_allowed_hosts = 'localhost,127.0.0.1,0.0.0.0'
+if ON_RENDER:
+    render_host = os.environ.get('RENDER_EXTERNAL_HOSTNAME', '')
+    if render_host:
+        _default_allowed_hosts = f'localhost,127.0.0.1,{render_host}'
 
 ALLOWED_HOSTS = [
     host.strip()
-    for host in os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
+    for host in os.environ.get('ALLOWED_HOSTS', _default_allowed_hosts).split(',')
     if host.strip()
 ]
 
