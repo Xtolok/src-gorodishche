@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="page-top">
+  <span class="badge">{{ page.badge }}</span>
+  <h1>{{ page.h1 }}</h1>
+  {% if page.intro %}<p class="page-intro">{{ page.intro }}</p>{% endif %}
+</div>
+
+<div class="about-hub-grid about-hub-grid-4">
+  <a href="{% url 'pravovye_akty_section' 'ustav' %}" class="about-hub-card">
+    <h2>Устав учреждения</h2>
+    <p>Устав и изменения к нему</p>
+  </a>
+  <a href="{% url 'pravovye_akty_section' 'litsenzii' %}" class="about-hub-card">
+    <h2>Лицензии</h2>
+    <p>Лицензии на осуществление деятельности</p>
+  </a>
+  <a href="{% url 'pravovye_akty_akty' %}" class="about-hub-card">
+    <h2>Нормативные акты</h2>
+    <p>Федеральное и региональное законодательство, нормативы</p>
+  </a>
+  <a href="{% url 'pravovye_akty_section' 'sout' %}" class="about-hub-card">
+    <h2>СОУТ</h2>
+    <p>Специальная оценка условий труда</p>
+  </a>
+</div>
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="page-top">
+  <span class="badge">{{ page.badge }}</span>
+  <h1>{{ page.h1 }}</h1>
+</div>
+
+{% if page.dark_card_title %}
+<div class="dark-card">
+  <h2>{{ page.dark_card_title }}</h2>
+  <p>{{ page.dark_card_text|linebreaksbr }}</p>
+</div>
+{% endif %}
+
+<div class="photo-gallery">
+  <figure class="photo-gallery-item">
+    <img src="{% static 'img/gallery-activity.jpg' %}" alt="Занятия в дневном отделении">
+    <figcaption>Творческие занятия</figcaption>
+  </figure>
+  <figure class="photo-gallery-item">
+    <img src="{% static 'img/gallery-spring.jpg' %}" alt="Весенние мероприятия на территории центра">
+    <figcaption>Весенние мероприятия</figcaption>
+  </figure>
+  <figure class="photo-gallery-item">
+    <img src="{% static 'img/hero-main.jpg' %}" alt="Здание социально-реабилитационного центра">
+    <figcaption>Наш центр</figcaption>
+  </figure>
+</div>
+
+{% if cards %}
+<div class="cards-3">
+  {% for card in cards %}
+  <div class="card">
+    <h2 class="card-title">{{ card.title }}</h2>
+    <p>{{ card.description|linebreaksbr }}</p>
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+
+{% if about_section %}
+<div class="section">
+  <h2>{{ about_section.title }}</h2>
+  {% for paragraph in about_section.paragraphs %}
+  <p>{{ paragraph }}</p>
+  {% endfor %}
+</div>
+{% endif %}
+
+{% if services_section %}
+<div class="section">
+  <h2>{{ services_section.title }}</h2>
+  <ul>
+    {% for item in services_section.items.all %}
+    <li>{{ item.text }}</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endif %}
+
+{% if how_to_section %}
+<div class="section">
+  <h2>{{ how_to_section.title }}</h2>
+  {% for item in how_to_section.items.all %}
+  <p class="contact-line">{{ item.text }}</p>
+  {% endfor %}
+</div>
+{% endif %}
+{% endblock %}

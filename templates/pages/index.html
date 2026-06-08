@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="hero-dark">
+  <span class="badge">{{ page.badge }}</span>
+  <h1>{{ page.h1 }}</h1>
+  {% if page.intro %}<p class="hero-desc">{{ page.intro }}</p>{% endif %}
+  <div class="hero-btns">
+    {% if page.hero_button_url %}
+    <a href="{{ page.get_hero_button_href }}" class="btn">{{ page.hero_button_text }}</a>
+    {% endif %}
+    <a href="{% url 'ob_uchrezhdenii' %}" class="btn-outline">Об учреждении</a>
+  </div>
+</div>
+
+
+<div class="feature-row">
+  <a href="{% url 'socialnye_uslugi' %}" class="feature-item fi-teal">
+    <svg class="fi-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    <div class="fi-label">Стационарное пребывание</div>
+    <div class="fi-sub">Круглосуточный уход и реабилитация</div>
+  </a>
+  <a href="{% url 'dnevnoe_otdelenie' %}" class="feature-item fi-blue">
+    <svg class="fi-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    <div class="fi-label">Дневное отделение</div>
+    <div class="fi-sub">Без отрыва от семьи</div>
+  </a>
+  <a href="{% url 'socialnye_uslugi' %}" class="feature-item fi-purple">
+    <svg class="fi-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+    <div class="fi-label">Психологическая помощь</div>
+    <div class="fi-sub">Поддержка и коррекция</div>
+  </a>
+  <a href="{% url 'rabota_s_obrascheniyami' %}" class="feature-item fi-amber">
+    <svg class="fi-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    <div class="fi-label">Работа со специалистами</div>
+    <div class="fi-sub">Педагоги, психологи, юристы</div>
+  </a>
+</div>
+
+{% if stats %}
+<div class="section">
+  <h2 class="visually-hidden">Показатели деятельности</h2>
+  <div class="stats-grid">
+    {% for stat in stats %}
+    <div class="stat">
+      <div class="stat-num">{{ stat.value }}</div>
+      <div class="stat-label">{{ stat.label }}</div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+
+{% if cards_main %}
+<div class="cards-3">
+  {% for card in cards_main %}
+  <div class="card">
+    {% if forloop.counter == 1 %}
+    <img src="{% static 'img/contacts-building.jpg' %}" alt="" class="card-top-photo" aria-hidden="true">
+    {% elif forloop.counter == 2 %}
+    <img src="{% static 'img/gallery-activity.jpg' %}" alt="" class="card-top-photo" aria-hidden="true">
+    {% else %}
+    <img src="{% static 'img/gallery-spring.jpg' %}" alt="" class="card-top-photo" aria-hidden="true">
+    {% endif %}
+    <h2 class="card-title">{{ card.title }}</h2>
+    <p>{{ card.description }}</p>
+    {% if card.link_url_name %}<a href="{% url card.link_url_name %}" class="card-link">{{ card.link_text }}</a>{% endif %}
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+
+{% if cards_bottom %}
+<div class="cards-2">
+  {% for card in cards_bottom %}
+  <div class="card">
+    <img src="{% static 'img/hero-main.jpg' %}" alt="" class="card-top-photo" aria-hidden="true">
+    <h2 class="card-title">{{ card.title }}</h2>
+    <p>{{ card.description }}</p>
+    {% if card.link_url_name %}<a href="{% url card.link_url_name %}" class="card-link">{{ card.link_text }}</a>{% endif %}
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+
+{% if how_to_section %}
+<div class="section">
+  <h2>{{ how_to_section.title }}</h2>
+  {% for item in how_to_section.items.all %}
+  <p{% if forloop.last %} class="section-paragraph-last"{% endif %}>{{ item.text }}</p>
+  {% endfor %}
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ news.title }} — {{ site.site_name }}{% endblock %}
+
+{% block content %}
+<article class="news-detail">
+  <a href="{% url 'novosti' %}" class="news-back">← Все новости</a>
+
+  <header class="news-detail-header">
+    <span class="news-detail-badge">Новость</span>
+    <time class="news-date news-detail-date" datetime="{{ news.published_at|date:'Y-m-d' }}">{{ news.published_at|date:'d.m.Y' }}</time>
+    <h1 class="news-detail-title">{{ news.title }}</h1>
+  </header>
+
+  <div class="news-detail-content{% if not news.image %} news-detail-content--solo{% endif %}">
+    <div class="news-detail-body">
+      {% if news.body %}
+      {{ news.body|linebreaks }}
+      {% else %}
+      <p class="text-muted">Текст публикации уточняется.</p>
+      {% endif %}
+    </div>
+
+    {% if news.image %}
+    <figure class="news-detail-photo">
+      <img src="{{ news.image.url }}" alt="{{ news.title }}">
+    </figure>
+    {% endif %}
+  </div>
+</article>
+{% endblock %}

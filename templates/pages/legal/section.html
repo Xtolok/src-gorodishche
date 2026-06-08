@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="page-top">
+  <a href="{% url back_url %}" class="page-back">← {% if back_url == 'pravovye_akty_akty' %}Нормативные акты{% else %}Правовая основа{% endif %}</a>
+  <span class="badge">{{ page.badge }}</span>
+  <h1>{{ page.h1 }}</h1>
+</div>
+
+<div class="section">
+  {% if section.items.all %}
+  <ul class="doc-list">
+    {% for item in section.items.all %}
+    <li>
+      {% if item.href %}
+      <a href="{{ item.href }}" target="_blank" rel="noopener">{{ item.text }}</a>
+      {% else %}
+      {{ item.text }}
+      {% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p>Документы будут добавлены.</p>
+  {% endif %}
+</div>
+{% endblock %}

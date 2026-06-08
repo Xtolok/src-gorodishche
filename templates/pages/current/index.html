@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+
+<div class="page-top">
+
+  <span class="badge">{{ page.badge }}</span>
+
+  <h1>{{ page.h1 }}</h1>
+
+  {% if page.intro %}<p class="page-intro">{{ page.intro }}</p>{% endif %}
+
+</div>
+
+
+
+<div class="about-hub-grid">
+
+  {% for section in sections %}
+
+  <a href="{% url 'tekushchaya_deyatelnost_section' section.slug %}" class="about-hub-card">
+
+    <h2>{{ section.title }}</h2>
+
+    <p>Открыть раздел</p>
+
+  </a>
+
+  {% empty %}
+
+  <p>Разделы будут добавлены.</p>
+
+  {% endfor %}
+
+</div>
+
+{% endblock %}
+

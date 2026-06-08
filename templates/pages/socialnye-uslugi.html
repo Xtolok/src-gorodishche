@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="hero-dark">
+  <span class="badge">{{ page.badge }}</span>
+  <h1>{{ page.h1 }}</h1>
+  {% if page.intro %}<p class="hero-desc">{{ page.intro }}</p>{% endif %}
+  {% if page.hero_button_url %}
+  <a href="{{ page.get_hero_button_href }}" class="btn">{{ page.hero_button_text }}</a>
+  {% endif %}
+</div>
+
+{% if cards %}
+<div class="cards-3">
+  {% for card in cards %}
+  <div class="card">
+    <h2 class="card-title">{{ card.title }}</h2>
+    <p>{{ card.description }}</p>
+    {% if card.link_url_name and card.button_text %}
+    <a href="{% url card.link_url_name %}" class="btn-teal">{{ card.button_text }}</a>
+    {% endif %}
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+
+{% if category_sections or full_list_section %}
+<div class="two-section">
+  <div class="section">
+    <h2>Категории социальных услуг</h2>
+    {% for sub in category_sections %}
+    <h3>{{ sub.title }}</h3>
+    <ul>
+      {% for item in sub.items.all %}
+      <li>{{ item.text }}</li>
+      {% endfor %}
+    </ul>
+    {% endfor %}
+  </div>
+  {% if full_list_section %}
+  <div class="section">
+    <h2>{{ full_list_section.title }}</h2>
+    <ul>
+      {% for item in full_list_section.items.all %}
+      <li>{{ item.text }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+</div>
+{% endif %}
+
+{% if bottom_section %}
+<div class="bottom-section">
+  <h2>{{ bottom_section.title }}</h2>
+  {% for paragraph in bottom_section.paragraphs %}
+  <p>{{ paragraph }}</p>
+  {% endfor %}
+</div>
+{% endif %}
+{% endblock %}

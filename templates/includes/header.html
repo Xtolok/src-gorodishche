@@ -1,0 +1,13 @@
+<header class="header" role="banner">
+  <a href="{% url 'index' %}" class="logo">{{ site.site_name }}</a>
+  <nav class="nav" aria-label="Основная навигация">
+    <a href="{% url 'index' %}"{% if active_page == 'index' %} class="active" aria-current="page"{% endif %}>Главная</a>
+    <a href="{% url 'socialnye_uslugi' %}"{% if active_page == 'socialnye_uslugi' %} class="active" aria-current="page"{% endif %}>Социальные услуги</a>
+    <a href="{% url 'rabota_s_obrascheniyami' %}"{% if active_page == 'rabota_s_obrascheniyami' %} class="active" aria-current="page"{% endif %}>Работа с обращениями</a>
+    <a href="{% url 'ob_uchrezhdenii' %}"{% if active_page == 'ob_uchrezhdenii' %} class="active" aria-current="page"{% endif %}>Об учреждении социального обслуживания</a>
+    <a href="{% url 'novosti' %}"{% if active_page == 'novosti' %} class="active" aria-current="page"{% endif %}>Новости</a>
+    <a href="{% url 'tekushchaya_deyatelnost' %}"{% if active_page == 'tekushchaya_deyatelnost' %} class="active" aria-current="page"{% endif %}>Текущая деятельность</a>
+    <a href="{% url 'nezavisimaya_otsenka_nok' %}"{% if active_page == 'nezavisimaya_otsenka_nok' %} class="active" aria-current="page"{% endif %}>Оценка качества НОК</a>
+    <a href="{% url 'pravovye_akty' %}"{% if active_page == 'pravovye_akty' %} class="active" aria-current="page"{% endif %}>Правовые акты</a>
+  </nav>
+</header>

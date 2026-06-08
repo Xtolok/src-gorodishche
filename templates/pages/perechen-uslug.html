@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="page-top">
+  <span class="badge">{{ page.badge }}</span>
+  <h1>{{ page.h1 }}</h1>
+  {% if page.free_banner_text %}<div class="free-badge">{{ page.free_banner_text }}</div>{% endif %}
+</div>
+
+{% for category in categories %}
+<div class="service-block">
+  <h2 class="service-title">{{ category.title }}</h2>
+  <ul>
+    {% for item in category.items.all %}
+    <li>{{ item.text }}</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endfor %}
+{% endblock %}

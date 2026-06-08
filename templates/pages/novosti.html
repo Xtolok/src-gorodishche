@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="page-top">
+  <span class="badge">{{ page.badge }}</span>
+  <h1>{{ page.h1 }}</h1>
+</div>
+
+<div class="news-block">
+  <h2>Последние публикации</h2>
+  {% for news in news_list %}
+  <a href="{% url 'novosti_detail' news.slug %}" class="news-item">
+    {% if news.image %}
+    <img src="{{ news.image.url }}" alt="" class="news-thumb" aria-hidden="true">
+    {% else %}
+    <div class="news-thumb" aria-hidden="true"></div>
+    {% endif %}
+    <div>
+      <h3 class="news-title">{{ news.title }}</h3>
+      <time class="news-date" datetime="{{ news.published_at|date:'Y-m-d' }}">{{ news.published_at|date:'d.m.Y' }}</time>
+      {% if news.body %}
+      <p class="news-excerpt">{{ news.body|truncatewords:20 }}</p>
+      {% endif %}
+    </div>
+  </a>
+  {% empty %}
+  <p class="text-muted">Новостей пока нет.</p>
+  {% endfor %}
+</div>
+{% endblock %}

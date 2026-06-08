@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="page-top">
+  {% include 'includes/about-back.html' %}
+  <span class="badge">{{ page.badge }}</span>
+  <h1>{{ page.h1 }}</h1>
+</div>
+
+<div class="staff-list">
+  {% for person in staff %}
+  <article class="staff-card">
+    <div class="staff-photo">
+      {% if person.photo %}
+      <img src="{{ person.photo.url }}" alt="{{ person.name|default:person.position }}">
+      {% else %}
+      <div class="staff-photo-placeholder" aria-hidden="true"></div>
+      {% endif %}
+    </div>
+    <div class="staff-info">
+      <p class="staff-position">{{ person.position }}</p>
+      {% if person.name %}<h2 class="staff-name">{{ person.name }}</h2>{% endif %}
+      <ul class="staff-contacts">
+        {% if person.phone %}<li><span>Телефон:</span> {{ person.phone }}</li>{% endif %}
+        {% if person.email %}<li><span>Email:</span> <a href="mailto:{{ person.email }}">{{ person.email }}</a></li>{% endif %}
+      </ul>
+    </div>
+  </article>
+  {% empty %}
+  <div class="section"><p>Информация о руководстве будет добавлена.</p></div>
+  {% endfor %}
+</div>
+{% endblock %}

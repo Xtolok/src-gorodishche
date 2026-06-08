@@ -1,0 +1,96 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="ru">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>{% block title %}{{ page.meta_title|default:site.site_name }}{% endblock %}</title>
+
+  <link rel="stylesheet" href="{% static 'css/site.css' %}">
+
+  {% block extra_css %}{% endblock %}
+
+</head>
+
+<body>
+
+  <a class="skip-link" href="#main-content">Перейти к основному содержанию</a>
+
+  <div class="a11y-bar" role="region" aria-label="Настройки отображения для людей с ограничениями зрения">
+
+    <div class="a11y-bar-inner">
+
+      <button type="button" id="a11y-toggle" class="a11y-toggle" aria-pressed="false">
+
+        Версия для слабовидящих
+
+      </button>
+
+      <div class="a11y-controls" id="a11y-controls" hidden>
+
+        <div class="a11y-group" role="group" aria-label="Размер шрифта">
+
+          <span class="a11y-group-label">Размер шрифта</span>
+
+          <button type="button" id="a11y-fs-down" class="a11y-btn" aria-label="Уменьшить шрифт">A−</button>
+
+          <span id="a11y-fs-value" class="a11y-fs-value" aria-live="polite">100%</span>
+
+          <button type="button" id="a11y-fs-up" class="a11y-btn" aria-label="Увеличить шрифт">A+</button>
+
+        </div>
+
+        <div class="a11y-group" role="group" aria-label="Цветовая схема">
+
+          <span class="a11y-group-label">Цвет</span>
+
+          <button type="button" class="a11y-btn" data-a11y-theme="yellow" aria-pressed="true">Чёрный на жёлтом</button>
+
+          <button type="button" class="a11y-btn" data-a11y-theme="light" aria-pressed="false">Чёрный на белом</button>
+
+          <button type="button" class="a11y-btn" data-a11y-theme="dark" aria-pressed="false">Белый на чёрном</button>
+
+        </div>
+
+        <div class="a11y-group" role="group" aria-label="Изображения">
+
+          <span class="a11y-group-label">Изображения</span>
+
+          <button type="button" id="a11y-images" class="a11y-btn" aria-pressed="true">Изображения: вкл.</button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="visually-hidden" id="a11y-live" aria-live="polite" aria-atomic="true"></div>
+
+  </div>
+
+  <div class="site-wrapper">
+
+    {% include 'includes/header.html' %}
+
+    <main id="main-content" class="page-content" tabindex="-1">
+
+      {% block content %}{% endblock %}
+
+    </main>
+
+    {% include 'includes/footer.html' %}
+
+  </div>
+
+  <script src="{% static 'js/accessibility.js' %}" defer></script>
+
+</body>
+
+</html>
+

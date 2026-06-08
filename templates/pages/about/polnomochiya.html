@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="page-top">
+  {% include 'includes/about-back.html' %}
+  <span class="badge">{{ page.badge }}</span>
+  <h1>{{ page.h1 }}</h1>
+</div>
+
+{% if tasks_section %}
+<div class="section">
+  <h2>{{ tasks_section.title }}</h2>
+  <ul>
+    {% for item in tasks_section.items.all %}
+    <li>{{ item.text }}</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endif %}
+
+{% if functions_section %}
+<div class="section">
+  <h2>{{ functions_section.title }}</h2>
+  <ul>
+    {% for item in functions_section.items.all %}
+    <li>{{ item.text }}</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endif %}
+{% endblock %}

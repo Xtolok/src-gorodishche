@@ -1,0 +1,18 @@
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-inner">
+    <span class="footer-copy">{{ site.footer_text }}</span>
+    <nav class="footer-nav-cols" aria-label="Навигация в подвале">
+      <div class="footer-nav-col">
+        <h4>Навигация</h4>
+        <a href="{% url 'index' %}">Главная</a>
+        <a href="{% url 'socialnye_uslugi' %}">Социальные услуги</a>
+        <a href="{% url 'rabota_s_obrascheniyami' %}">Работа с обращениями</a>
+        <a href="{% url 'novosti' %}">Новости</a>
+      </div>
+      <div class="footer-nav-col">
+        <a href="{% url 'pravovye_akty' %}" class="footer-link-offset">Нормативные акты</a>
+        <a href="{% url 'ob_uchrezhdenii' %}">Об учреждении</a>
+      </div>
+    </nav>
+  </div>
+</footer>

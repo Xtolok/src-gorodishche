@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="page-top">
+  <span class="badge">{{ page.badge }}</span>
+  <h1>{{ page.h1 }}</h1>
+</div>
+
+<div class="photo-banner">
+  <img src="{% static 'img/contacts-building.jpg' %}" alt="Здание центра по адресу {{ contact.address }}">
+</div>
+
+<div class="cards-2">
+  <div class="card">
+    <h2 class="card-title">Адрес и телефоны</h2>
+    <div class="contact-row">
+      <span class="contact-label">Адрес</span>
+      <span class="contact-value">{{ contact.address }}</span>
+    </div>
+    <div class="contact-row">
+      <span class="contact-label">Телефон</span>
+      <span class="contact-value">
+        <a href="tel:{{ contact.phone_primary_tel }}">{{ contact.phone_primary }}</a><br>
+        {% if contact.phone_secondary %}<a href="tel:{{ contact.phone_secondary_tel }}">{{ contact.phone_secondary }}</a>{% endif %}
+      </span>
+    </div>
+    <div class="contact-row">
+      <span class="contact-label">Email</span>
+      <span class="contact-value"><a href="mailto:{{ contact.email }}">{{ contact.email }}</a></span>
+    </div>
+  </div>
+  <div class="card">
+    <h2 class="card-title">Режим работы</h2>
+    <div class="contact-row">
+      <span class="contact-label">Пн — Пт</span>
+      <span class="contact-value">{{ contact.work_weekdays }}</span>
+    </div>
+    <div class="contact-row">
+      <span class="contact-label">Перерыв</span>
+      <span class="contact-value">{{ contact.work_break }}</span>
+    </div>
+    <div class="contact-row">
+      <span class="contact-label">Сб — Вс</span>
+      <span class="contact-value">{{ contact.work_weekend }}</span>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Приём граждан</h2>
+  <h3>Личный приём директора</h3>
+  {% for line in contact.reception_director.splitlines %}
+  <p>{{ line }}</p>
+  {% endfor %}
+  <h3>Письменные обращения</h3>
+  <p>{{ contact.reception_written }}</p>
+  <h3>Онлайн-обращения</h3>
+  <p>{{ contact.reception_online }}</p>
+  {% if contact.has_map %}
+  <div class="map-container" role="region" aria-label="Карта: {{ contact.address }}">
+    {% if contact.map_iframe %}
+    {{ contact.map_iframe|safe }}
+    {% else %}
+    <iframe
+      src="{{ contact.yandex_map_widget_url }}"
+      allowfullscreen
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      title="Карта: {{ contact.address }}"
+    ></iframe>
+    {% endif %}
+  </div>
+  {% elif contact.map_placeholder %}
+  <div class="map-placeholder">{{ contact.map_placeholder }}</div>
+  {% endif %}
+</div>
+{% endblock %}

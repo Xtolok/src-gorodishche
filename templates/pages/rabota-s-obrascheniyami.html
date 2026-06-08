@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="hero-dark">
+  <span class="badge">{{ page.badge }}</span>
+  <h1>{{ page.h1 }}</h1>
+  {% if page.intro %}<p class="hero-desc">{{ page.intro }}</p>{% endif %}
+  <a href="{{ page.get_hero_button_href }}" class="btn" target="_blank" rel="noopener noreferrer">
+    {{ page.hero_button_text }}
+    <span class="visually-hidden"> (открывается в новой вкладке)</span>
+  </a>
+</div>
+
+{% if appeal_cards %}
+<div class="cards-2">
+  {% for section in appeal_cards %}
+  <div class="card">
+    <h2 class="card-title">{{ section.title }}</h2>
+    <ul>
+      {% for item in section.items.all %}
+      <li>{{ item.text }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+
+{% if online_section %}
+<div class="single-card">
+  <div class="section">
+    <h2>{{ online_section.title }}</h2>
+    <ul>
+      {% for item in online_section.items.all %}
+      <li>{{ item.text }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endif %}
+{% endblock %}

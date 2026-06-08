@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="page-top">
+  <a href="{% url 'pravovye_akty' %}" class="page-back">← Правовая основа</a>
+  <span class="badge">{{ page.badge }}</span>
+  <h1>{{ page.h1 }}</h1>
+</div>
+
+<div class="about-hub-grid">
+  <a href="{% url 'pravovye_akty_section' 'federal' %}" class="about-hub-card">
+    <h2>Федеральное законодательство</h2>
+    <p>Федеральные законы и постановления</p>
+  </a>
+  <a href="{% url 'pravovye_akty_section' 'regional' %}" class="about-hub-card">
+    <h2>Законодательство Волгоградской области</h2>
+    <p>Региональные законы и приказы</p>
+  </a>
+  <a href="{% url 'pravovye_akty_section' 'normativy' %}" class="about-hub-card">
+    <h2>Нормативы и порядки</h2>
+    <p>Нормативы обеспечения и порядки предоставления услуг</p>
+  </a>
+</div>
+{% endblock %}

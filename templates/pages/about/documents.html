@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="page-top">
+  {% include 'includes/about-back.html' %}
+  <span class="badge">{{ page.badge }}</span>
+  <h1>{{ page.h1 }}</h1>
+</div>
+
+<div class="section">
+  {% if documents %}
+  <ul class="doc-list">
+    {% for doc in documents %}
+    <li>
+      {% if doc.file %}
+      <a href="{{ doc.file.url }}" target="_blank" rel="noopener">{{ doc.title }}</a>
+      {% else %}
+      {{ doc.title }}
+      {% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p>Документы будут добавлены.</p>
+  {% endif %}
+</div>
+{% endblock %}

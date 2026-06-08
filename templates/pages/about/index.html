@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="page-top">
+  <span class="badge">{{ page.badge }}</span>
+  <h1>{{ page.h1 }}</h1>
+  {% if page.intro %}<p class="page-intro">{{ page.intro }}</p>{% endif %}
+</div>
+
+<div class="about-hub-grid">
+  <a href="{% url 'ob_uchrezhdenii_kontakty' %}" class="about-hub-card">
+    <h2>Контакты</h2>
+    <p>Реквизиты, адреса, режим работы, карта и приём граждан</p>
+  </a>
+  <a href="{% url 'ob_uchrezhdenii_polnomochiya' %}" class="about-hub-card">
+    <h2>Полномочия</h2>
+    <p>Задачи и функции учреждения</p>
+  </a>
+  <a href="{% url 'ob_uchrezhdenii_rukovodstvo' %}" class="about-hub-card">
+    <h2>Руководство</h2>
+    <p>Директор и руководящий состав</p>
+  </a>
+  <a href="{% url 'ob_uchrezhdenii_lokalnye_akty' %}" class="about-hub-card">
+    <h2>Локальные акты</h2>
+    <p>Положения, правила и коллективный договор</p>
+  </a>
+  <a href="{% url 'ob_uchrezhdenii_pravila' %}" class="about-hub-card">
+    <h2>Правила распорядка</h2>
+    <p>Правила внутреннего распорядка</p>
+  </a>
+  <a href="{% url 'ob_uchrezhdenii_popechitelskiy_sovet' %}" class="about-hub-card">
+    <h2>Попечительский совет</h2>
+    <p>Приказы, планы работы и отчёты</p>
+  </a>
+</div>
+{% endblock %}
