@@ -18,9 +18,10 @@ from dotenv import load_dotenv
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-load_dotenv(BASE_DIR / '.env')
-
 ON_RENDER = os.environ.get('RENDER') == 'true'
+
+if not ON_RENDER:
+    load_dotenv(BASE_DIR / '.env')
 
 
 # Quick-start development settings - unsuitable for production
@@ -33,10 +34,10 @@ SECRET_KEY = os.environ.get(
 )
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get(
-    'DEBUG',
-    'False' if ON_RENDER else 'True',
-).lower() in ('true', '1', 'yes')
+if ON_RENDER:
+    DEBUG = False
+else:
+    DEBUG = os.environ.get('DEBUG', 'True').lower() in ('true', '1', 'yes')
 
 _default_allowed_hosts = 'localhost,127.0.0.1,0.0.0.0'
 if ON_RENDER:
