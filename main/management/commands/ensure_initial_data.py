@@ -1,7 +1,6 @@
 from django.core.management import call_command
 from django.core.management.base import BaseCommand
 
-from config.superuser import ensure_superuser
 from main.models import Page
 
 
@@ -16,5 +15,3 @@ class Command(BaseCommand):
             call_command('loaddata', 'initial_data')
             self.stdout.write(self.style.SUCCESS('Данные загружены.'))
 
-        ensure_superuser()
-        self.stdout.write(self.style.SUCCESS('Админ готов.'))
