@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
-# Render → Pre-Deploy Command
+# Инициализация сайта: вызывается из start.sh (free tier) или Pre-Deploy (платный)
 set -o errexit
-
 echo "=== Миграции ==="
 python manage.py migrate --noinput
 

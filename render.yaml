@@ -3,7 +3,6 @@ services:
     name: src-gorodishche
     runtime: python
     buildCommand: ./build.sh
-    preDeployCommand: ./predeploy.sh
     startCommand: ./start.sh
     envVars:
       - key: PYTHON_VERSION
