@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# То же самое, что start.sh (для ясности в настройках Render)
+# Render → Build Command
 set -o errexit
 
 pip install -r requirements.txt
