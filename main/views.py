@@ -1,6 +1,8 @@
 from django.shortcuts import get_object_or_404, redirect, render
 
+from .forms import FeedbackForm
 from .models import (
+    FeedbackSubmission,
     AboutDocument,
     ContentSection,
     CurrentActivitySection,
@@ -93,13 +95,33 @@ def dnevnoe_otdelenie(request):
 def rabota_s_obrascheniyami(request):
     page = _page(Page.SLUG_APPEAL)
     sections = {s.order: s for s in _sections(Page.SLUG_APPEAL)}
+
+    if request.method == 'POST':
+        form = FeedbackForm(request.POST)
+        if form.is_valid():
+            submission = form.save()
+            return redirect('feedback_success', reference=submission.reference_number)
+    else:
+        form = FeedbackForm()
+
     ctx = {
         **_base_context('rabota_s_obrascheniyami'),
         'page': page,
         'appeal_cards': [sections[i] for i in (1, 2) if i in sections],
         'online_section': sections.get(10),
+        'form': form,
     }
     return render(request, 'pages/rabota-s-obrascheniyami.html', ctx)
+
+
+def feedback_success(request, reference):
+    submission = get_object_or_404(FeedbackSubmission, reference_number=reference)
+    ctx = {
+        **_base_context('rabota_s_obrascheniyami'),
+        'page': _page(Page.SLUG_APPEAL),
+        'submission': submission,
+    }
+    return render(request, 'pages/feedback-success.html', ctx)
 
 
 def kontakty(request):

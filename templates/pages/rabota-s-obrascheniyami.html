@@ -38,4 +38,49 @@
   </div>
 </div>
 {% endif %}
+
+<div class="single-card" id="feedback-form">
+  <div class="section">
+    <h2>Форма обратной связи</h2>
+    <p>Заполните форму ниже. После отправки вам будет присвоен уникальный регистрационный номер обращения.</p>
+
+    {% if form.non_field_errors %}
+    <div class="form-errors" role="alert">
+      {% for error in form.non_field_errors %}
+      <p>{{ error }}</p>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <form method="post" class="feedback-form" novalidate>
+      {% csrf_token %}
+
+      <div class="form-field">
+        <label for="{{ form.phone.id_for_label }}">{{ form.phone.label }}</label>
+        {{ form.phone }}
+        {% if form.phone.errors %}
+        <p class="form-field-error" role="alert">{{ form.phone.errors.0 }}</p>
+        {% endif %}
+      </div>
+
+      <div class="form-field">
+        <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+        {{ form.email }}
+        {% if form.email.errors %}
+        <p class="form-field-error" role="alert">{{ form.email.errors.0 }}</p>
+        {% endif %}
+      </div>
+
+      <div class="form-field">
+        <label for="{{ form.text.id_for_label }}">{{ form.text.label }} <span class="form-required">*</span></label>
+        {{ form.text }}
+        {% if form.text.errors %}
+        <p class="form-field-error" role="alert">{{ form.text.errors.0 }}</p>
+        {% endif %}
+      </div>
+
+      <button type="submit" class="btn">Отправить обращение</button>
+    </form>
+  </div>
+</div>
 {% endblock %}

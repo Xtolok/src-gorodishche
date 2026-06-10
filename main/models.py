@@ -518,6 +518,48 @@ class CurrentActivitySection(models.Model):
         return self.title
 
 
+class FeedbackSubmission(models.Model):
+    reference_number = models.CharField('Регистрационный номер', max_length=20, unique=True, editable=False)
+    phone = models.CharField('Телефон', max_length=50, blank=True)
+    email = models.EmailField('Email', blank=True)
+    text = models.TextField('Текст обращения')
+    created_at = models.DateTimeField('Дата отправки', auto_now_add=True)
+
+    class Meta:
+        verbose_name = 'Обращение'
+        verbose_name_plural = 'Обращения'
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return self.reference_number
+
+    def save(self, *args, **kwargs):
+        if not self.reference_number:
+            self.reference_number = self._generate_reference_number()
+        super().save(*args, **kwargs)
+
+    @classmethod
+    def _generate_reference_number(cls):
+        from django.utils import timezone
+
+        year = timezone.now().year
+        prefix = f'SRC-{year}-'
+        last = (
+            cls.objects.filter(reference_number__startswith=prefix)
+            .order_by('-reference_number')
+            .values_list('reference_number', flat=True)
+            .first()
+        )
+        if last:
+            try:
+                num = int(last.rsplit('-', 1)[-1]) + 1
+            except ValueError:
+                num = 1
+        else:
+            num = 1
+        return f'{prefix}{num:05d}'
+
+
 class RegionalSocialCenter(models.Model):
     number = models.PositiveSmallIntegerField('№')
     name = models.CharField('Наименование', max_length=300)

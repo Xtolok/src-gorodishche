@@ -3,6 +3,7 @@ from django.contrib import admin
 from .models import (
     AboutDocument,
     ContactInfo,
+    FeedbackSubmission,
     ContentSection,
     CurrentActivitySection,
     NokContent,
@@ -156,6 +157,15 @@ class CurrentActivitySectionAdmin(admin.ModelAdmin):
 class RegionalSocialCenterAdmin(admin.ModelAdmin):
     list_display = ('number', 'name', 'url')
     ordering = ('number',)
+
+
+@admin.register(FeedbackSubmission)
+class FeedbackSubmissionAdmin(admin.ModelAdmin):
+    list_display = ('reference_number', 'phone', 'email', 'created_at')
+    list_filter = ('created_at',)
+    search_fields = ('reference_number', 'phone', 'email', 'text')
+    readonly_fields = ('reference_number', 'created_at')
+    ordering = ('-created_at',)
 
 
 @admin.register(Page)

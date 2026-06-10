@@ -8,6 +8,11 @@ urlpatterns = [
     path('perechen-uslug/', views.perechen_uslug, name='perechen_uslug'),
     path('dnevnoe-otdelenie/', views.dnevnoe_otdelenie, name='dnevnoe_otdelenie'),
     path('rabota-s-obrascheniyami/', views.rabota_s_obrascheniyami, name='rabota_s_obrascheniyami'),
+    path(
+        'rabota-s-obrascheniyami/otpravleno/<str:reference>/',
+        views.feedback_success,
+        name='feedback_success',
+    ),
     path('kontakty/', views.kontakty, name='kontakty'),
     path('ob-uchrezhdenii/', views.ob_uchrezhdenii, name='ob_uchrezhdenii'),
     path('ob-uchrezhdenii/kontakty/', views.ob_uchrezhdenii_kontakty, name='ob_uchrezhdenii_kontakty'),

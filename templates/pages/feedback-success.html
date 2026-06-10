@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Обращение принято — {{ site.site_name }}{% endblock %}
+
+{% block content %}
+<div class="hero-dark">
+  <span class="badge">Обращение принято</span>
+  <h1>Ваше обращение зарегистрировано</h1>
+  <p class="hero-desc">Сохраните регистрационный номер — он понадобится при уточнении статуса обращения.</p>
+</div>
+
+<div class="single-card">
+  <div class="section feedback-success">
+    <p class="feedback-ref-label">Регистрационный номер</p>
+    <p class="feedback-ref-number" aria-label="Регистрационный номер обращения">{{ submission.reference_number }}</p>
+    <p class="feedback-ref-hint">Дата отправки: {{ submission.created_at|date:"d.m.Y H:i" }}</p>
+    <a href="{% url 'rabota_s_obrascheniyami' %}" class="btn">Вернуться к разделу обращений</a>
+  </div>
+</div>
+{% endblock %}
